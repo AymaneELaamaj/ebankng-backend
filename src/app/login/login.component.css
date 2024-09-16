@@ -1,0 +1,55 @@
+/* Styles globaux pour la page */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Style pour la carte de connexion */
+.login-card {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-card:hover {
+  transform: scale(1.02);
+}
+
+.login-card h3 {
+  color: #fff;
+}
+
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #fff;
+  color: #6e8efb;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #6e8efb;
+  color: #fff;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}

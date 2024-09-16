@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-header">Accounts for Customer {{ customerId }}</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Account ID</th>
+            <th>Type</th>
+            <th>Balance</th>
+            <th>Created At</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.id }}</td>
+            <td>{{ account.type }}</td>
+            <td>{{ account.balance }}</td>
+            <td>{{ account.createdAt | date }}</td>
+            <td *ngIf="account.type === 'CurrentAccount'">
+              Overdraft: {{ account.overDraft }}
+            </td>
+            <td *ngIf="account.type === 'SavingAccount'">
+              Interest Rate: {{ account.interestRate }}
+            </td>
+            <td>
+              <button class="btn btn-primary">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

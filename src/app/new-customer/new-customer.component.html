@@ -1,0 +1,67 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">Add Customer</div>
+    <div class="card-body">
+      <form [formGroup]="newForm" (ngSubmit)="AddCustomers()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            id="name"
+            class="form-control"
+            type="text"
+            formControlName="name"
+            placeholder="Enter customer name"
+          />
+          <div
+            *ngIf="
+              newForm.get('name')?.invalid &&
+              (newForm.get('name')?.touched || newForm.get('name')?.dirty)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="newForm.get('name')?.errors?.['required']"
+              >Name is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            id="email"
+            class="form-control"
+            formControlName="email"
+            type="email"
+            placeholder="Enter customer email"
+          />
+          <div
+            *ngIf="
+              newForm.get('email')?.invalid &&
+              (newForm.get('email')?.touched || newForm.get('email')?.dirty)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="newForm.get('email')?.errors?.['required']"
+              >Email is required.</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="newForm.get('email')?.errors?.['email']"
+              >Enter a valid email.</small
+            >
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!newForm.valid"
+        >
+          Add Customer
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
