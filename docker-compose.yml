@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:13-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: digital_bank
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ehtp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  spring-app:
+    build:
+      context: D:/projet-web/digital-ebank_back/digital-banking-spring-backend
+      dockerfile: Dockerfile
+    container_name: spring-app
+    depends_on:
+      - postgres-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/digital_bank
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ehtp
+    ports:
+      - "8090:8090"
+    networks:
+      - app-network
+
+  angular-app:
+    build:
+      context: D:/projet-web/digital-ebank
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "80:80"
+    depends_on:
+      - spring-app
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
+    driver: bridge

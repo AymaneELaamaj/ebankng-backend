@@ -15,6 +15,7 @@ public class BankAccountMapperImpl {
     public CustomerDTO fromCustomer(Customer customer){
         CustomerDTO customerDTO=new CustomerDTO();
         BeanUtils.copyProperties(customer,customerDTO);
+
         return  customerDTO;
     }
     public Customer fromCustomerDTO(CustomerDTO customerDTO){
@@ -26,7 +27,7 @@ public class BankAccountMapperImpl {
     public SavingBankAccountDTO fromSavingBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setCustomerDTO(fromCustomer(savingAccount.getCustomer()));
+        savingBankAccountDTO.setCustomer(fromCustomer(savingAccount.getCustomer()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
@@ -34,14 +35,14 @@ public class BankAccountMapperImpl {
     public SavingAccount fromSavingBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setCustomer(fromCustomerDTO(savingBankAccountDTO.getCustomerDTO()));
+        savingAccount.setCustomer(fromCustomerDTO(savingBankAccountDTO.getCustomer()));
         return savingAccount;
     }
 
     public CurrentBankAccountDTO fromCurrentBankAccount(CurrentAccount currentAccount){
         CurrentBankAccountDTO currentBankAccountDTO=new CurrentBankAccountDTO();
         BeanUtils.copyProperties(currentAccount,currentBankAccountDTO);
-        currentBankAccountDTO.setCustomerDTO(fromCustomer(currentAccount.getCustomer()));
+        currentBankAccountDTO.setCustomer(fromCustomer(currentAccount.getCustomer()));
         currentBankAccountDTO.setType(currentAccount.getClass().getSimpleName());
         return currentBankAccountDTO;
     }
@@ -49,7 +50,7 @@ public class BankAccountMapperImpl {
     public CurrentAccount fromCurrentBankAccountDTO(CurrentBankAccountDTO currentBankAccountDTO){
         CurrentAccount currentAccount=new CurrentAccount();
         BeanUtils.copyProperties(currentBankAccountDTO,currentAccount);
-        currentAccount.setCustomer(fromCustomerDTO(currentBankAccountDTO.getCustomerDTO()));
+        currentAccount.setCustomer(fromCustomerDTO(currentBankAccountDTO.getCustomer()));
         return currentAccount;
     }
 
