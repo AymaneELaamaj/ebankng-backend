@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-md-4">
+      <div class="login-card">
+        <h3 class="text-center mb-4">Connexion</h3>
+        <form [formGroup]="loginform" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Nom d'utilisateur"
+              formControlName="name"
+              required
+            />
+          </div>
+          <div class="form-group mt-3">
+            <label for="password">Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Mot de passe"
+              formControlName="pwd"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-4">
+            Se connecter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

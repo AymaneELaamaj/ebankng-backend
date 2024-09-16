@@ -1,0 +1,160 @@
+<div class="container mt-3">
+  <div class="row">
+    <!-- Account Search Form -->
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="mb-0">Search Accounts</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="accounts" (ngSubmit)="findaacounts()">
+            <div class="input-group">
+              <span class="input-group-text">Account ID</span>
+              <input
+                type="text"
+                formControlName="accid"
+                class="form-control"
+                placeholder="Enter account ID"
+              />
+              <button type="submit" class="btn btn-primary ms-2">
+                <i class="bi bi-search"></i> Search
+              </button>
+            </div>
+          </form>
+
+          <!-- Table with Account Operations -->
+          <div *ngIf="acc" class="mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5>Balance: {{ acc.balance | currency }}</h5>
+              <ul class="pagination mb-0">
+                <li
+                  *ngFor="
+                    let value of [].constructor(acc.totalPages);
+                    let page = index
+                  "
+                  class="page-item"
+                >
+                  <a (click)="pagesuit(page)" class="page-link">{{
+                    page + 1
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Account ID</th>
+                  <th>Operation Date</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let operation of acc.accountOperationDTOS">
+                  <td>{{ operation.id }}</td>
+                  <td>{{ operation.operationDate | date : "dd.MM.yyyy" }}</td>
+                  <td>{{ operation.amount | number : "1.2-2" }}</td>
+                  <td>{{ operation.type }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operation Form -->
+    <div *ngIf="acc" class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <strong>Operation Details</strong>
+        </div>
+        <div class="card-body">
+          <form
+            [formGroup]="operationGroup"
+            (ngSubmit)="saveOperations()"
+            method="post"
+          >
+            {{ this.operationGroup.value | json }}
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="debit"
+                value="debit"
+                formControlName="OpeartionType"
+              />
+              <label class="form-check-label" for="debit"> Debit </label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="credit"
+                value="credit"
+                formControlName="OpeartionType"
+              />
+              <label class="form-check-label" for="credit"> Credit </label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="transfer"
+                value="transfer"
+                formControlName="OpeartionType"
+              />
+              <label class="form-check-label" for="transfer"> Transfer </label>
+            </div>
+
+            <div
+              *ngIf="operationGroup.value.OpeartionType == 'transfer'"
+              class="mb-3 mt-3"
+            >
+              <label for="accountDestination" class="form-label"
+                >Account Destination</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="accountDestination"
+                placeholder="Enter account destination"
+                formControlName="accountdistination"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount</label>
+              <input
+                type="text"
+                class="form-control"
+                id="amount"
+                placeholder="Enter amount"
+                formControlName="amount"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="accountSource" class="form-label">Decription</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Decription"
+                formControlName="description"
+              />
+            </div>
+
+            <div class="mt-3 d-grid">
+              <button type="submit" class="btn btn-primary">
+                Save Operation
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

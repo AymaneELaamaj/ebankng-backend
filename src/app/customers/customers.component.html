@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card mt-3" *ngIf="customers">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div *ngIf="search">
+          <form [formGroup]="search" (ngSubmit)="find()" class="d-flex">
+            <input
+              class="form-control me-2"
+              type="Text"
+              placeholder="Search"
+              formControlName="keyword"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-header">Customers</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>Delete</th>
+            <th>Accounts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="delete(customer)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-info" (click)="viewAccounts(customer.id)">
+                Accounts
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
