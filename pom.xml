@@ -89,7 +89,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>digital-ebank_spring</finalName>
+
     </build>
 
 </project>

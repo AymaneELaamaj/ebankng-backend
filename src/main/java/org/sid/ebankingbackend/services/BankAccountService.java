@@ -6,7 +6,7 @@ import org.sid.ebankingbackend.exceptions.BankAccountNotFoundException;
 import org.sid.ebankingbackend.exceptions.CustomerNotFoundException;
 
 import java.util.List;
-public interface BankAccountService {
+public interface  BankAccountService {
     CustomerDTO saveCustomer(CustomerDTO customerDTO);
 
 
